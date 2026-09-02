@@ -10,9 +10,7 @@ app.get('/produtos', (req, res) => {
     const sql = 'SELECT * FROM produtos';
 
     pool.query(sql, (erro, resultado) => {
-        console.log(erro);
-        console.log(resultado);
-
+        
         res.json(resultado.rows);
 
     });
@@ -31,6 +29,19 @@ app.get('/produtos/:id', (req, res) => {
         }
         
         res.json(resultado.rows);
+    });
+
+});
+
+app.post('/produtos', (req, res) => {
+    const nome = req.body.nome;
+    const preco = req.body.preco;
+    const descricao = req.body.descricao;
+
+    const sql = `INSERT INTO produtos (nome, preco, descricao) VALUES ('${nome}', '${preco}', '${descricao}')`; 
+
+    pool.query(sql, (erro, resultado) => {
+        res.json(resultado);
     });
 
 });
