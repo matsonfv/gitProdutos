@@ -10,7 +10,7 @@ app.get('/produtos', (req, res) => {
     const sql = 'SELECT * FROM produtos';
 
     pool.query(sql, (erro, resultado) => {
-        
+
         res.json(resultado.rows);
 
     });
@@ -23,7 +23,7 @@ app.get('/produtos/:id', (req, res) => {
     const sql = `SELECT * FROM produtos WHERE id = ${id}`;
 
     pool.query(sql, (erro, resultado) => {        
-
+        console.log(erro)
         if (resultado.rowCount === 0) {
             return res.status(404).json({ mensagem: 'Produto não encontrado' });
         }
