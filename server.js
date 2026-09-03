@@ -4,7 +4,11 @@ const pool = require('./db');
 const app = express();
 const PORT = 3000;
 
+const cors = require('cors');
+
 app.use(express.json());
+
+app.use(cors());
 
 app.get('/produtos', (req, res) => {
     const sql = 'SELECT * FROM produtos';
