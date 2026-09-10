@@ -9,11 +9,12 @@
 <body>
 
     <h2>Cadastrar Produto</h2>
-    <form id="formulario">
+    <form class="formulario-container" id="formulario">
         <input type="text" id="nome" placeholder="Nome" required>
         <input type="number" id="preco" placeholder="Preço" required>
         <input type="text" id="descricao" placeholder="Descrição" required>
 
+<<<<<<< HEAD
         <button class="btn-salvar" type="submit">Salvar</button>
     </form>
 
@@ -21,11 +22,23 @@
     <form id="form-exibir">
         <input type="number" id="id-produto" placeholder="ID do Produto" required>
         <button class="btn-exibir" type="submit">Exibir</button>
+=======
+        <button class="btn-adicionar" type="submit">Salvar</button>
+>>>>>>> ebae5196edb9677166b9e968bbd158f4f821c2da
     </form>
+
+    <h2>Exibir produto</h2>
+    <form class="formulario-container" id="form-exibir">
+        <input type="number" id="id-produto" placeholder="ID do Produto" required>
+        <button class="btn-exibir" type="submit">Exibir</button>
+    </form>
+
+    <div class="lista-container" id="exibir-produto"></div>
+
 
     <h2>Lista de Produtos</h2>
     <!-- É aqui dentro que o JavaScript vai jogar os produtos -->
-    <div id="lista-produtos"></div>
+    <div class="lista-container" id="lista-produtos"></div>
 
     <script src="script.js"></script>
 </body>
