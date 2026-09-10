@@ -31,9 +31,11 @@ app.get('/produtos', (req, res) => {
 app.get('/produtos/:id', (req, res) => {
     const id = req.params.id;
 
-    const sql = `SELECT * FROM produtos WHERE id = ${id}`;
+    const sql = 'SELECT * FROM produtos WHERE id = $1';
 
-    pool.query(sql, (erro, resultado) => {        
+    const valores = [id];
+
+    pool.query(sql, valores, (erro, resultado) => {        
         console.log(erro)
         if (resultado.rowCount === 0) {
             return res.status(404).json({ mensagem: 'Produto não encontrado' });
@@ -50,9 +52,11 @@ app.post('/produtos', (req, res) => {
     const preco = req.body.preco;
     const descricao = req.body.descricao;
 
-    const sql = `INSERT INTO produtos (nome, preco, descricao) VALUES ('${nome}', '${preco}', '${descricao}')`; 
+    const sql = 'INSERT INTO produtos (nome, preco, descricao) VALUES ($1, $2, $3})'; 
 
-    pool.query(sql, (erro, resultado) => {
+    const valores = [nome, preco, descricao];
+
+    pool.query(sql, valores,  (erro, resultado) => {
         res.json(resultado);
     });
 
@@ -62,9 +66,11 @@ app.post('/produtos', (req, res) => {
 app.delete('/produtos/:id', (req, res) => {
     const id = req.params.id;
 
-    const sql = `DELETE FROM produtos WHERE id = ${id}`;
+    const sql = 'DELETE FROM produtos WHERE id = $1';
 
-    pool.query(sql, (erro, resultado) => {
+    const valores = [id];
+
+    pool.query(sql, valores, (erro, resultado) => {
         if (erro) {
             return res.status(500).json({ mensagem: 'Erro ao deletar produto' });
         }
