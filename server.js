@@ -1,15 +1,21 @@
 const express = require('express');
+// Importa o módulo de conexão com o banco de dados
 const pool = require('./db');
-
+// Cria uma instância do aplicativo Express
 const app = express();
+// Define a porta do servidor
 const PORT = 3000;
 
+// Importa o módulo CORS
 const cors = require('cors');
 
+// Middleware para permitir o envio de dados em formato JSON
 app.use(express.json());
 
+// Habilita o CORS para permitir requisições de diferentes origens
 app.use(cors());
 
+// Rota para buscar todos os produtos
 app.get('/produtos', (req, res) => {
     const sql = 'SELECT * FROM produtos';
 
@@ -21,6 +27,7 @@ app.get('/produtos', (req, res) => {
 
 });
 
+// Buscar produto por ID
 app.get('/produtos/:id', (req, res) => {
     const id = req.params.id;
 
@@ -37,6 +44,7 @@ app.get('/produtos/:id', (req, res) => {
 
 });
 
+// Adicionar produto
 app.post('/produtos', (req, res) => {
     const nome = req.body.nome;
     const preco = req.body.preco;
@@ -50,6 +58,21 @@ app.post('/produtos', (req, res) => {
 
 });
 
+// Deletar ID produto
+app.delete('/produtos/:id', (req, res) => {
+    const id = req.params.id;
+
+    const sql = `DELETE FROM produtos WHERE id = ${id}`;
+
+    pool.query(sql, (erro, resultado) => {
+        if (erro) {
+            return res.status(500).json({ mensagem: 'Erro ao deletar produto' });
+        }
+        res.json({ mensagem: 'Produto deletado com sucesso' });
+    });
+});
+
+// Inicia o servidor na porta definida
 app.listen(PORT, () => {
     console.log(`Servidor rodando com sucesso em http://localhost:${PORT}`);
 });
