@@ -10,7 +10,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid blue;
 }
 
 /* Estilo do formulário de cadastro */
@@ -43,6 +42,31 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
+    width: 100px;
+}
+
+.btn-exibir {
+    background-color: #ffc107;
+}
+
+.btn-exibir:hover {
+    background-color: #e0a800;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333;
+}
+
+.btn-adicionar {
+    background-color: #007bff;
+}
+
+.btn-adicionar:hover {
+    background-color: #0069d9;
 }
 
 button:hover {
