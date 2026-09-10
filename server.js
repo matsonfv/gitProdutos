@@ -36,7 +36,6 @@ app.get('/produtos/:id', (req, res) => {
     const valores = [id];
 
     pool.query(sql, valores, (erro, resultado) => {        
-        console.log(erro)
         if (resultado.rowCount === 0) {
             return res.status(404).json({ mensagem: 'Produto não encontrado' });
         }
@@ -52,7 +51,7 @@ app.post('/produtos', (req, res) => {
     const preco = req.body.preco;
     const descricao = req.body.descricao;
 
-    const sql = 'INSERT INTO produtos (nome, preco, descricao) VALUES ($1, $2, $3})'; 
+    const sql = 'INSERT INTO produtos (nome, preco, descricao) VALUES ($1, $2, $3)'; 
 
     const valores = [nome, preco, descricao];
 
