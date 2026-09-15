@@ -53,6 +53,13 @@ app.post('/produtos', (req, res) => {
 
     const sql = 'INSERT INTO produtos (nome, preco, descricao) VALUES ($1, $2, $3)'; 
 
+    if (!nome || !preco || !descricao) {
+        alert('Todos os campos são obrigatórios');
+        return res.status(400).json({ mensagem: 'Todos os campos são obrigatórios' });
+    } else if (typeof preco !== 'number' || preco <= 0) {
+        alert('O preço deve ser um número positivo');
+        return res.status(400).json({ mensagem: 'O preço deve ser um número positivo' });
+    }
     const valores = [nome, preco, descricao];
 
     pool.query(sql, valores,  (erro, resultado) => {
